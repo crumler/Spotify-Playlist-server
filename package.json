@@ -1,0 +1,25 @@
+{
+  "name": "spotifyplaylistserver",
+  "version": "1.0.0",
+  "description": "server for storing spotify playlists",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./node_modules/http-server/bin/http-server"
+  },
+  "author": "Chris Rumler",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^14.14.7",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.0",
+    "pg": "^7.4.1",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.37.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
