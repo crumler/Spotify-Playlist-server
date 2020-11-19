@@ -1,8 +1,16 @@
 module.exports = function (sequelize, DataTypes) {
     return sequelize.define('playlistsong', {
-        song: DataTypes.STRING,
-        artist: DataTypes.STRING,
-        album: DataTypes.STRING,
-        playlistId: DataTypes.NUMBER
+        song: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        artist: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        album: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }
     });
 };

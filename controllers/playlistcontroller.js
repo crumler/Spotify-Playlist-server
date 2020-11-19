@@ -3,7 +3,7 @@ var router = express.Router();
 var sequelize = require('../db');
 var Playlist = require('../models/playlist')(sequelize, require('sequelize'));
 
-// Create Playlist endpoing
+// Create Playlist endpoint
 router.post('/create', (req, res) => {
     var playlistName = req.body.playlist.playlistName;
     var playlistOwner = req.body.playlist.playlistOwner;
@@ -27,8 +27,8 @@ router.post('/create', (req, res) => {
 });
 
 // Get All Playlists endpoint
-router.get('/playlist', function (req, res) {
-    let playlistOwner = playlistOwner;
+router.get('/:id', function (req, res) {
+    var playlistOwner = playlistOwner;
 
     Playlist
         .findAll({
@@ -44,3 +44,5 @@ router.get('/playlist', function (req, res) {
             }
         );
 });
+
+module.exports = router;

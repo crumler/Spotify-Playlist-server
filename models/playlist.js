@@ -1,7 +1,16 @@
 module.exports = function (sequelize, DataTypes) {
     return sequelize.define('playlist', {
-        playlistName: DataTypes.STRING,
-        playlistOwner: DataTypes.STRING,
-        description: DataTypes.STRING
+        playlistName: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        playlistOwner: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        description: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
     });
 };

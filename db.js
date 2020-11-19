@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('spotifyplaylistserver', 'postgres', 'LetAlexaIn', {
+const sequelize = new Sequelize('spotifyplaylistcreator', 'postgres', 'LetAlexaIn', {
     host: 'localhost',
     dialect: 'postgres'
 });
@@ -13,5 +13,23 @@ sequelize.authenticate().then(
         console.log(err);
     }
 );
+
+User = sequelize.import('./models/user')
+Playlists = sequelize.import('./models/playlist');
+Songs = sequelize.import('./models/playlistsong');
+
+// Playlists.hasMany(Songs)
+// Songs.belongsToMany(Playlists)
+// User.hasMany(Playlists)
+// Playlists.belongsTo(User)
+
+User.hasMany(Playlists);
+Playlists.belongsTo(User);
+
+Songs.belongsToMany(Playlists, {through: 'playlistsongsjoiner'});
+Playlists.belongsToMany(Songs, {through: 'playlistsongsjoiner'});
+
+
+
 
 module.exports = sequelize;
