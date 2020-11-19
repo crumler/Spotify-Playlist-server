@@ -16,6 +16,6 @@ app.use('/user', userController);
 app.use(require('./middleware/validate-session'));
 app.use('/playlist', playlistController);
 
-app.listen(5040, function(){
-    console.log('Server is listening on port # 5040!');
+app.listen(process.env.PORT, () => {
+    console.log(`Server is listening on port ${process.env.PORT}`);
 });
