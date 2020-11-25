@@ -1,22 +1,23 @@
 var express = require('express');
 var router = express.Router();
 var sequelize = require('../db');
-var PlaylistSong = require('../models/playlistsong')(sequelize, require('sequelize'));
-
+// var PlaylistSong = require('../models/playlistsong')(sequelize, require('sequelize'));
+var PlaylistSong = sequelize.import('../models/playlistsong');
+var validateSession = require('../middleware/validate-session');
 // Add Song to Playlist endpoint
-router.put('/create', (req, res) => {
+router.post('/create', validateSession, (req, res) => {
     var song = req.body.playlistsong.song;
     var artist = req.body.playlistsong.artist;
     var album = req.body.playlistsong.album;
 
-    Playlist.put({
+    PlaylistSong.create({
         playlistName: playlistName,
         playlistOwner: playlistOwner,
         description: description
     }).then(
         function createSuccess(playlist) {
             res.json({
-                playlist:playlist
+                playlist: playlist
             });
         },
         function createError(err) {
@@ -25,3 +26,6 @@ router.put('/create', (req, res) => {
         }
     );
 });
+
+// !Create GET UPDATE and DELETE
+module.exports = router;

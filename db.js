@@ -1,14 +1,21 @@
 const Sequelize = require('sequelize');
 
+//BELOW IS THE HEROKU DEPLOYMENT CODE
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
+    host: 'localhost',
     dialect: 'postgres'
 });
 
+// const sequelize = new Sequelize('spotifyplaylistcreator', 'postgres', 'LetAlexaIn', {
+//     host: 'localhost',
+//     dialect: 'postgres'
+// });
+
 sequelize.authenticate().then(
-    function() {
+    function () {
         console.log('Connected to Spotify Playlist Server database');
     },
-    function(err){
+    function (err) {
         console.log(err);
     }
 );
@@ -24,11 +31,10 @@ Songs = sequelize.import('./models/playlistsong');
 
 User.hasMany(Playlists);
 Playlists.belongsTo(User);
-
-Songs.belongsToMany(Playlists, {through: 'playlistsongsjoiner'});
-Playlists.belongsToMany(Songs, {through: 'playlistsongsjoiner'});
-
-
+User.hasMany(Songs);
+Songs.belongsTo
+Songs.belongsToMany(Playlists, { through: 'playlistsongsjoiner' });
+Playlists.belongsToMany(Songs, { through: 'playlistsongsjoiner' });
 
 
 module.exports = sequelize;

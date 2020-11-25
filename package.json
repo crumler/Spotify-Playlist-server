@@ -10,13 +10,19 @@
   "author": "Chris Rumler",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^14.14.7",
+    "@types/node": "^14.14.10",
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.4",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
+    "http": "0.0.0",
     "jsonwebtoken": "^8.2.0",
     "pg": "^7.4.1",
     "pg-hstore": "^2.3.2",
+    "query-string": "^6.13.7",
+    "request": "^2.86.0",
     "sequelize": "^4.37.0"
   },
   "devDependencies": {
