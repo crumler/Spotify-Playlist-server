@@ -79,10 +79,9 @@ router.delete('/delete/:id', (req, res) => {
     var playlistName = req.body.playlist.playlistName;
     var description = req.body.playlist.description;
     var playlistOwner = req.body.playlist.playlistOwner;
-    var data = req.params.id;
 
     Playlist.destroy({
-        where: { id: data, userId: playlistOwner }
+        where: { id: data, userId: req.user.id }
     }).then(
         function deleteSuccess(data) {
             res.json({
