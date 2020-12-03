@@ -9,7 +9,7 @@ var User = sequelize.import('../models/user');
 // Create Playlist endpoint
 router.post('/create', validateSession, (req, res) => {
     var playlistName = req.body.playlist.playlistName;
-    var playlistOwner = req.body.playlist.playlistOwner;
+    var playlistOwner = req.user.username;
     var description = req.body.playlist.description;
     var userId = req.user.id;
 
