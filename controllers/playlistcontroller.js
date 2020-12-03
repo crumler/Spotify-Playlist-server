@@ -4,17 +4,20 @@ var sequelize = require('../db');
 // var Playlist = require('../models/playlist')(sequelize, require('sequelize'));
 var Playlist = sequelize.import('../models/playlist');
 var validateSession = require('../middleware/validate-session');
+var User = sequelize.import('../models/user');
 
 // Create Playlist endpoint
 router.post('/create', validateSession, (req, res) => {
     var playlistName = req.body.playlist.playlistName;
     var playlistOwner = req.body.playlist.playlistOwner;
     var description = req.body.playlist.description;
+    var userId = req.user.id;
 
     Playlist.create({
         playlistName: playlistName,
         playlistOwner: playlistOwner,
-        description: description
+        description: description,
+        userId: userId
     }).then(
         function createSuccess(playlist) {
             res.json({

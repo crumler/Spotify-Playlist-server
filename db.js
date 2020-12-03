@@ -31,10 +31,11 @@ Songs = sequelize.import('./models/playlistsong');
 
 User.hasMany(Playlists);
 Playlists.belongsTo(User);
-User.hasMany(Songs);
-Songs.belongsTo
+Playlists.hasMany(Songs);
+
+
 Songs.belongsToMany(Playlists, { through: 'playlistsongsjoiner' });
-Playlists.belongsToMany(Songs, { through: 'playlistsongsjoiner' });
+// Playlists.belongsToMany(Songs, { through: 'playlistsongsjoiner' });
 
 
 module.exports = sequelize;
