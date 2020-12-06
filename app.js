@@ -29,9 +29,9 @@ var generateRandomString = function (length) {
 };
 
 var stateKey = 'spotify_auth_state';
-
+app.use(cors())
 app.use(express.static(__dirname + '/public'))
-    .use(cors())
+
     .use(cookieParser());
 
 app.get('/login', function (req, res) {

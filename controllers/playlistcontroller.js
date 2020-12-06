@@ -32,8 +32,9 @@ router.post('/create', validateSession, (req, res) => {
 });
 
 // Get All Playlists endpoint
-router.get('/:id', function (req, res) {
-    var playlistOwner = playlistOwner;
+router.get('/', function (req, res) {
+    var playlistOwner = req.user.username;
+    console.log('Made it!')
 
     Playlist
         .findAll({
@@ -53,7 +54,7 @@ router.get('/:id', function (req, res) {
 // !Add UPDATE and DELETE endpoints
 
 // Update playlist endpoint
-router.put('/update/:id', function (req, res) {
+router.put('/update/', function (req, res) {
     var playlistName = req.body.playlist.playlistName;
     var description = req.body.playlist.description;
     var data = req.params.id;
@@ -77,11 +78,11 @@ router.put('/update/:id', function (req, res) {
 });
 
 // Delete playlist endpoint
-router.delete('/delete/:id', (req, res) => {
+router.delete('/delete/', (req, res) => {
     var data = req.params.id;
-    var playlistName = req.body.playlist.playlistName;
-    var description = req.body.playlist.description;
-    var playlistOwner = req.body.playlist.playlistOwner;
+    // var playlistName = req.body.playlist.playlistName;
+    // var description = req.body.playlist.description;
+    // var playlistOwner = req.body.playlist.playlistOwner;
 
     Playlist.destroy({
         where: { id: data, userId: req.user.id }
