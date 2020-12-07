@@ -3,11 +3,10 @@ var router = express.Router();
 var sequelize = require('../db');
 // var Playlist = require('../models/playlist')(sequelize, require('sequelize'));
 var Playlist = sequelize.import('../models/playlist');
-var validateSession = require('../middleware/validate-session');
 var User = sequelize.import('../models/user');
 
 // Create Playlist endpoint
-router.post('/create', validateSession, (req, res) => {
+router.post('/create', (req, res) => {
     var playlistName = req.body.playlist.playlistName;
     var playlistOwner = req.user.username;
     var description = req.body.playlist.description;
@@ -33,15 +32,17 @@ router.post('/create', validateSession, (req, res) => {
 
 // Get All Playlists endpoint
 router.get('/', function (req, res) {
-    var playlistOwner = req.user.username;
+    var playlistOwner = req.user.id;
+    console.log(req.user.id)
     console.log('Made it!')
 
     Playlist
         .findAll({
-            where: { playlistOwner: playlistOwner }
+            where: { userId: playlistOwner }
         })
         .then(
             function findAllPlaylists(data) {
+                console.log(data)
                 res.json(data);
             },
             function findAllError(err) {
@@ -51,10 +52,8 @@ router.get('/', function (req, res) {
         );
 });
 
-// !Add UPDATE and DELETE endpoints
-
 // Update playlist endpoint
-router.put('/update/', function (req, res) {
+router.put('/update/:id', function (req, res) {
     var playlistName = req.body.playlist.playlistName;
     var description = req.body.playlist.description;
     var data = req.params.id;
@@ -78,7 +77,7 @@ router.put('/update/', function (req, res) {
 });
 
 // Delete playlist endpoint
-router.delete('/delete/', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
     var data = req.params.id;
     // var playlistName = req.body.playlist.playlistName;
     // var description = req.body.playlist.description;

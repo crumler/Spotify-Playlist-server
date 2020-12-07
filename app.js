@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 var request = require('request');
-var cors = require('cors');
 var express = require('express');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
@@ -29,7 +28,6 @@ var generateRandomString = function (length) {
 };
 
 var stateKey = 'spotify_auth_state';
-app.use(cors())
 app.use(express.static(__dirname + '/public'))
 
     .use(cookieParser());
