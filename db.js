@@ -1,15 +1,15 @@
 const Sequelize = require('sequelize');
 
 //BELOW IS THE HEROKU DEPLOYMENT CODE
-// const sequelize = new Sequelize(process.env.DATABASE_URL, {
-//     host: 'localhost',
-//     dialect: 'postgres'
-// });
-
-const sequelize = new Sequelize('redbadgeproject', 'postgres', 'LetAlexaIn', {
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
     host: 'localhost',
     dialect: 'postgres'
 });
+
+// const sequelize = new Sequelize('redbadgeproject', 'postgres', 'LetAlexaIn', {
+//     host: 'localhost',
+//     dialect: 'postgres'
+// });
 
 sequelize.authenticate().then(
     function () {
