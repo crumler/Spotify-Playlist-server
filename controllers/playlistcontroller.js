@@ -1,16 +1,15 @@
-var express = require('express');
-var router = express.Router();
-var sequelize = require('../db');
-// var Playlist = require('../models/playlist')(sequelize, require('sequelize'));
-var Playlist = sequelize.import('../models/playlist');
-var User = sequelize.import('../models/user');
+let express = require('express');
+let router = express.Router();
+let sequelize = require('../db');
+let Playlist = sequelize.import('../models/playlist');
+let User = sequelize.import('../models/user');
 
 // Create Playlist endpoint
 router.post('/create', (req, res) => {
-    var playlistName = req.body.playlist.playlistName;
-    var playlistOwner = req.user.username;
-    var description = req.body.playlist.description;
-    var userId = req.user.id;
+    let playlistName = req.body.playlist.playlistName;
+    let playlistOwner = req.user.username;
+    let description = req.body.playlist.description;
+    let userId = req.user.id;
 
     Playlist.create({
         playlistName: playlistName,
@@ -32,7 +31,7 @@ router.post('/create', (req, res) => {
 
 // Get All Playlists endpoint
 router.get('/', function (req, res) {
-    var playlistOwner = req.user.id;
+    let playlistOwner = req.user.id;
     console.log(req.user.id)
     console.log('Made it!')
 
@@ -54,9 +53,9 @@ router.get('/', function (req, res) {
 
 // Update playlist endpoint
 router.put('/update/:id', function (req, res) {
-    var playlistName = req.body.playlist.playlistName;
-    var description = req.body.playlist.description;
-    var data = req.params.id;
+    let playlistName = req.body.playlist.playlistName;
+    let description = req.body.playlist.description;
+    let data = req.params.id;
 
     Playlist.update({
         playlistName: playlistName,
@@ -78,10 +77,7 @@ router.put('/update/:id', function (req, res) {
 
 // Delete playlist endpoint
 router.delete('/delete/:id', (req, res) => {
-    var data = req.params.id;
-    // var playlistName = req.body.playlist.playlistName;
-    // var description = req.body.playlist.description;
-    // var playlistOwner = req.body.playlist.playlistOwner;
+    let data = req.params.id;
 
     Playlist.destroy({
         where: { id: data, userId: req.user.id }

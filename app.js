@@ -1,39 +1,40 @@
 require('dotenv').config();
 
-var request = require('request');
-var express = require('express');
-var querystring = require('querystring');
-var cookieParser = require('cookie-parser');
-var app = express();
-var userController = require('./controllers/usercontroller');
-var playlistController = require('./controllers/playlistcontroller');
-var playlistSongController = require('./controllers/playlistsongcontroller');
-// var songs = require('./controllers/')
-var sequelize = require('./db');
+let request = require('request');
+let express = require('express');
+let querystring = require('querystring');
+let cookieParser = require('cookie-parser');
+let app = express();
+let userController = require('./controllers/usercontroller');
+let playlistController = require('./controllers/playlistcontroller');
+let playlistSongController = require('./controllers/playlistsongcontroller');
+let sequelize = require('./db');
 
-// var redirect_uri = 'http://localhost:5040/callback';
+// ! The below code that is commented out is related to Spotify oAuthentication, which will be implemented in version 2.0
+
+// let redirect_uri = 'http://localhost:5040/callback';
 
 // generates a random string for completing Spotify oAuth
-// var generateRandomString = function (length) {
-//     var text = '';
-//     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+// let generateRandomString = function (length) {
+//     let text = '';
+//     let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-//     for (var i = 0; i < length; i++) {
+//     for (let i = 0; i < length; i++) {
 //         text += possible.charAt(Math.floor(Math.random() * possible.length));
 //     }
 //     return text;
 // };
 
-// var stateKey = 'spotify_auth_state';
+// let stateKey = 'spotify_auth_state';
 // app.use(express.static(__dirname + '/public'))
 
 //     .use(cookieParser());
 
 // app.get('/login', function (req, res) {
-//     var state = generateRandomString(16);
+//     let state = generateRandomString(16);
 //     res.cookie(stateKey, state);
 
-//     var scope = 'playlist-read-private ugc-image-upload playlist-modify-public playlist-modify-private user-follow-modify user-follow-read';
+//     let scope = 'playlist-read-private ugc-image-upload playlist-modify-public playlist-modify-private user-follow-modify user-follow-read';
 //     res.redirect('https://accounts.spotify.com/authorize?' + querystring.stringify({
 //         response_type: 'code',
 //         client_id: client_id,
@@ -48,9 +49,9 @@ var sequelize = require('./db');
 //     // your application requests refresh and access tokens
 //     // after checking the state parameter
 
-//     var code = req.query.code || null;
-//     var state = req.query.state || null;
-//     var storedState = req.cookies ? req.cookies[stateKey] : null;
+//     let code = req.query.code || null;
+//     let state = req.query.state || null;
+//     let storedState = req.cookies ? req.cookies[stateKey] : null;
 
 //     if (state === null || state !== storedState) {
 //         res.redirect('/#' +
@@ -59,7 +60,7 @@ var sequelize = require('./db');
 //             }));
 //     } else {
 //         res.clearCookie(stateKey);
-//         var authOptions = {
+//         let authOptions = {
 //             url: 'https://accounts.spotify.com/api/token',
 //             form: {
 //                 code: code,
@@ -75,10 +76,10 @@ var sequelize = require('./db');
 //         request.post(authOptions, function (error, response, body) {
 //             if (!error && response.statusCode === 200) {
 
-//                 var access_token = body.access_token,
+//                 let access_token = body.access_token,
 //                     refresh_token = body.refresh_token;
 
-//                 var options = {
+//                 let options = {
 //                     url: 'https://api.spotify.com/v1/me',
 //                     headers: { 'Authorization': 'Bearer ' + access_token },
 //                     json: true
@@ -108,8 +109,8 @@ var sequelize = require('./db');
 // app.get('/refresh_token', function (req, res) {
 
 //     // requesting access token from refresh token
-//     var refresh_token = req.query.refresh_token;
-//     var authOptions = {
+//     let refresh_token = req.query.refresh_token;
+//     let authOptions = {
 //         url: 'https://accounts.spotify.com/api/token',
 //         headers: { 'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64')) },
 //         form: {
@@ -121,7 +122,7 @@ var sequelize = require('./db');
 
 //     request.post(authOptions, function (error, response, body) {
 //         if (!error && response.statusCode === 200) {
-//             var access_token = body.access_token;
+//             let access_token = body.access_token;
 //             res.send({
 //                 'access_token': access_token
 //             });
@@ -136,9 +137,9 @@ app.use(require('./middleware/headers'));
 
 
 // app.get('/login', function (req, res) {
-//     var scopes = 'playlist-read-private ugc-image-upload playlist-modify-public playlist-modify-private user-follow-modify user-follow-read';
-//     var myClientID = '';
-//     var redirectUri = 'http://localhost:5040/callback'
+//     let scopes = 'playlist-read-private ugc-image-upload playlist-modify-public playlist-modify-private user-follow-modify user-follow-read';
+//     let myClientID = '';
+//     let redirectUri = 'http://localhost:5040/callback'
 //     res.redirect('https://accounts.spotify.com/authorize' +
 //         '?response_type=code' +
 //         '&client_id=' + myClientID +

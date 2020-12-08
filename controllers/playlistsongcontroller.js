@@ -1,16 +1,14 @@
-var express = require('express');
-var router = express.Router();
-var sequelize = require('../db');
-// var PlaylistSong = require('../models/playlistsong')(sequelize, require('sequelize'));
-var PlaylistSong = sequelize.import('../models/playlistsong');
+let express = require('express');
+let router = express.Router();
+let sequelize = require('../db');
+let PlaylistSong = sequelize.import('../models/playlistsong');
 
-var Playlist = sequelize.import('../models/playlist');
 // Add Song to Playlist endpoint
 router.post('/create', (req, res) => {
-    var song = req.body.playlistsong.song;
-    var artist = req.body.playlistsong.artist;
-    var album = req.body.playlistsong.album;
-    var playlistId = req.body.playlistsong.playlistId;
+    let song = req.body.playlistsong.song;
+    let artist = req.body.playlistsong.artist;
+    let album = req.body.playlistsong.album;
+    let playlistId = req.body.playlistsong.playlistId;
 
     PlaylistSong.create({
         playlistId: playlistId,
@@ -30,14 +28,13 @@ router.post('/create', (req, res) => {
     );
 });
 
-// !Create GET UPDATE and DELETE
 
 //Update Playlist Song endpoint
 router.put('/update/:id', function (req, res) {
-    var song = req.body.playlistsong.song;
-    var artist = req.body.playlistsong.artist;
-    var album = req.body.playlistsong.album;
-    var data = req.params.id;
+    let song = req.body.playlistsong.song;
+    let artist = req.body.playlistsong.artist;
+    let album = req.body.playlistsong.album;
+    let data = req.params.id;
 
     PlaylistSong.update({
         song: song,
@@ -59,13 +56,11 @@ router.put('/update/:id', function (req, res) {
     )
 });
 
+
 //Delete Playlist Song endpoint
 router.delete('/delete/:id', (req, res) => {
-    var data = req.params.id;
-    var song = req.body.playlistsong.song;
-    var artist = req.body.playlistsong.artist;
-    var album = req.body.playlistsong.album;
-    var playlistId = req.body.playlistsong.playlistId;
+    let data = req.params.id;
+    let playlistId = req.body.playlistsong.playlistId;
 
     PlaylistSong.destroy({
         where: { id: data, playlistId: playlistId }
