@@ -7,7 +7,6 @@ let jwt = require('jsonwebtoken');
 
 // User register endpoint
 router.post('/register', (req, res) => {
-    console.log(req.body)
     let firstName = req.body.user.firstName;
     let lastName = req.body.user.lastName;
     let username = req.body.user.username;

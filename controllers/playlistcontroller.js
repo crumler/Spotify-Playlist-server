@@ -32,8 +32,6 @@ router.post('/create', (req, res) => {
 // Get All Playlists endpoint
 router.get('/', function (req, res) {
     let playlistOwner = req.user.id;
-    console.log(req.user.id)
-    console.log('Made it!')
 
     Playlist
         .findAll({

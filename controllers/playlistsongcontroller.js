@@ -3,6 +3,27 @@ let router = express.Router();
 let sequelize = require('../db');
 let PlaylistSong = sequelize.import('../models/playlistsong');
 
+// Get All Songs endpoint
+router.get('/', function (req, res) {
+    let playlistId = req.body.playlistsong.playlistId;
+    let songID = req.playlistsong.id;
+
+    PlaylistSong
+        .findAll({
+            where: { playlistId: songID }
+        })
+        .then(
+            function findAllSongs(data) {
+                console.log(data)
+                res.json(data);
+            },
+            function findAllError(err) {
+                res.send(500, err.message);
+                console.log('Error getting all songs in this playlist!')
+            }
+        );
+});
+
 // Add Song to Playlist endpoint
 router.post('/create', (req, res) => {
     let song = req.body.playlistsong.song;
